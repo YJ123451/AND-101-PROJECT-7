@@ -3,25 +3,28 @@ package com.example.pokemongenerator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import okhttp3.Headers
 
 class MainActivity : AppCompatActivity() {
     var pokemonEndpoint = 1
-    lateinit var nameTextView: TextView
-    lateinit var urlTextView: TextView
-    lateinit var numberTextView: TextView
+    lateinit var recyclerView: RecyclerView
+    private val pokemonList = ArrayList<Pokemon>()
+    private lateinit var pokemonAdapter: PokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val button = findViewById<Button>(R.id.Pokebutton)
-        nameTextView = findViewById<TextView>(R.id.Name)
-        urlTextView = findViewById<TextView>(R.id.poke_Url)
-        numberTextView = findViewById<TextView>(R.id.poke_number)
+        recyclerView = findViewById(R.id.pokemonRecyclerView)
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        pokemonAdapter = PokemonAdapter(pokemonList)
+        recyclerView.adapter = pokemonAdapter
 
         button.setOnClickListener {
             getNextPokemon()
@@ -35,12 +38,12 @@ class MainActivity : AppCompatActivity() {
         client[apiUrl, object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 val name = json.jsonObject.getString("name")
+                val number = json.jsonObject.getInt("id") // Use "id" to get the number
                 val url = apiUrl
-                val number = endpoint
 
-                nameTextView.text = "Name: $name"
-                urlTextView.text = "URL: $url"
-                numberTextView.text = "Number: $number"
+                // Add the retrieved Pokemon to the list
+                pokemonList.add(Pokemon(name, url, number))
+                pokemonAdapter.notifyDataSetChanged() // Notify the adapter of the data change
             }
 
             override fun onFailure(
