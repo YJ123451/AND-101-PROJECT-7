@@ -41,9 +41,9 @@ class MainActivity : AppCompatActivity() {
                 val number = json.jsonObject.getInt("id") // Use "id" to get the number
                 val url = apiUrl
 
-                // Add the retrieved Pokemon to the list
+                
                 pokemonList.add(Pokemon(name, url, number))
-                pokemonAdapter.notifyDataSetChanged() // Notify the adapter of the data change
+                pokemonAdapter.notifyDataSetChanged() 
             }
 
             override fun onFailure(
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 response: String,
                 throwable: Throwable?
             ) {
-                // Handle the failure case
+        
             }
         }]
     }
