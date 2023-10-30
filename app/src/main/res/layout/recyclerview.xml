@@ -9,15 +9,21 @@
         android:id="@+id/Name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/bangers"
+        android:textColor="#3F51B5"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/poke_Url"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/butcherman"
+        style="@style/Red_Font"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Name" />
 
@@ -25,6 +31,8 @@
         android:id="@+id/poke_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/fascinate"
+        android:textColor="#FFC0CB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/poke_Url" />
 </androidx.constraintlayout.widget.ConstraintLayout>
